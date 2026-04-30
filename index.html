@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Insurance - Quick Quote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M9 2L3 6v6l6 4 6-4V6L9 2z" fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 6v6M6 8l3-2 3 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    PolicyKit
+  </div>
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <div class="dot"></div>
+      IRDAI Registered
+    </div>
+    <div class="trust-badge hidden" id="ssl-badge">
+      <div class="dot"></div>
+      SSL Secure
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-steps">
+    <div class="step-item">
+      <div class="step-circle active" id="sc1">1</div>
+      <div class="step-label active" id="sl1">Vehicle</div>
+    </div>
+    <div class="step-connector" id="conn1"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc2">2</div>
+      <div class="step-label" id="sl2">Coverage</div>
+    </div>
+    <div class="step-connector" id="conn2"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc3">3</div>
+      <div class="step-label" id="sl3">Contact</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- STEP 1: VEHICLE -->
+  <div class="step-panel active" id="step1">
+    <div class="step-header">
+      <div class="step-tag">Step 1 of 3</div>
+      <h1>Tell us about your vehicle</h1>
+      <p>We'll find your car details from the registration number.</p>
+    </div>
+
+    <div class="field">
+      <label for="reg">Registration Number <span class="hint">e.g. DL09CA1234</span></label>
+      <div class="reg-field">
+        <input type="text" id="reg" placeholder="DL09CA1234" maxlength="10" autocomplete="off" spellcheck="false">
+        <button class="reg-lookup-btn" id="lookup-btn">Look up</button>
+      </div>
+      <div class="error-msg" id="reg-error">Please enter a valid registration number (e.g. DL09CA1234)</div>
+    </div>
+
+    <div class="vehicle-card" id="vehicle-card">
+      <div class="vehicle-card-label">Vehicle found</div>
+      <div class="vehicle-card-name" id="vc-name">-</div>
+      <div class="vehicle-card-meta" id="vc-meta">-</div>
+    </div>
+
+    <div id="manual-fields" class="hidden">
+      <div class="field-grid">
+        <div class="field">
+          <label for="make">Make</label>
+          <div class="select-wrapper">
+            <select id="make">
+              <option value="">Select</option>
+              <option>Maruti Suzuki</option>
+              <option>Hyundai</option>
+              <option>Tata</option>
+              <option>Honda</option>
+              <option>Toyota</option>
+              <option>Kia</option>
+              <option>Mahindra</option>
+              <option>MG</option>
+              <option>Skoda</option>
+              <option>Volkswagen</option>
+              <option>Renault</option>
+              <option>Nissan</option>
+              <option>Ford</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="model">Model</label>
+          <div class="select-wrapper">
+            <select id="model">
+              <option value="">Select make first</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="year">Year of Manufacture</label>
+          <div class="select-wrapper">
+            <select id="year">
+              <option value="">Year</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fuel">Fuel Type</label>
+          <div class="select-wrapper">
+            <select id="fuel">
+              <option value="">Select</option>
+              <option>Petrol</option>
+              <option>Diesel</option>
+              <option>CNG</option>
+              <option>Electric (EV)</option>
+              <option>Hybrid</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="variant">Variant</label>
+        <div class="select-wrapper">
+          <select id="variant">
+            <option value="">Select model first</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="city">City of Registration</label>
+        <div class="select-wrapper">
+          <select id="city">
+            <option value="">Select city</option>
+            <option>Mumbai</option>
+            <option>Delhi</option>
+            <option>Bengaluru</option>
+            <option>Hyderabad</option>
+            <option>Chennai</option>
+            <option>Kolkata</option>
+            <option>Pune</option>
+            <option>Ahmedabad</option>
+            <option>Jaipur</option>
+            <option>Surat</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field hidden" id="city-from-reg">
+      <label for="city2">City of Registration</label>
+      <div class="select-wrapper">
+        <select id="city2">
+          <option value="">Select city</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bengaluru</option>
+          <option>Hyderabad</option>
+          <option>Chennai</option>
+          <option>Kolkata</option>
+          <option>Pune</option>
+          <option>Ahmedabad</option>
+          <option>Jaipur</option>
+          <option>Surat</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="step1-next">Continue to Coverage -></button>
+    </div>
+    <div class="form-footer">Your data is encrypted and never sold to third parties.</div>
+  </div>
+
+  <!-- STEP 2: COVERAGE -->
+  <div class="step-panel" id="step2">
+    <div class="step-header">
+      <div class="step-tag">Step 2 of 3</div>
+      <h1>Coverage preferences</h1>
+      <p>These details help us find the best premium for you.</p>
+    </div>
+
+    <div class="field">
+      <label>Policy expiry date <span class="hint">(current / last policy)</span></label>
+      <input type="date" id="expiry-date">
+      <div class="error-msg" id="expiry-error">Please enter a valid date</div>
+    </div>
+
+    <div class="field">
+      <label>Have you made any claims in the last 3 years?</label>
+      <div class="pill-group" id="claims-made-pills">
+        <div class="pill selected" data-has-claim="false">No claims</div>
+        <div class="pill" data-has-claim="true">Yes, I made a claim</div>
+      </div>
+    </div>
+
+    <div class="field" id="claim-free-years-field">
+      <label>How many years have you been claim-free continuously?</label>
+      <div class="pill-group" id="claim-free-pills">
+        <div class="pill">1 year</div>
+        <div class="pill">2 years</div>
+        <div class="pill">3 years</div>
+        <div class="pill">4 years</div>
+        <div class="pill selected">5+ years</div>
+      </div>
+      <div class="info-box ncb-derived-display" id="ncb-derived-display">
+        Your NCB: <strong id="ncb-derived-value">50%</strong> - we'll apply this discount automatically.
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Insured Declared Value (IDV)</label>
+      <div class="idv-options">
+        <div class="idv-option selected">
+          <div class="idv-option-radio"></div>
+          <div class="idv-option-text">
+            <strong>Market Value</strong>
+            <span>Recommended - standard coverage, balanced premium</span>
+          </div>
+        </div>
+        <div class="idv-option">
+          <div class="idv-option-radio"></div>
+          <div class="idv-option-text">
+            <strong>Low IDV</strong>
+            <span>Lower premium, lower payout in case of total loss</span>
+          </div>
+        </div>
+        <div class="idv-option">
+          <div class="idv-option-radio"></div>
+          <div class="idv-option-text">
+            <strong>High IDV</strong>
+            <span>Higher premium, maximum protection for newer cars</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Previous Insurer <span class="hint">(optional)</span></label>
+      <div class="select-wrapper">
+        <select id="prev-insurer">
+          <option value="">Not sure / New car</option>
+          <option>ACKO</option>
+          <option>Bajaj Allianz</option>
+          <option>Digit</option>
+          <option>HDFC ERGO</option>
+          <option>ICICI Lombard</option>
+          <option>New India Assurance</option>
+          <option>Oriental Insurance</option>
+          <option>Reliance General</option>
+          <option>Royal Sundaram</option>
+          <option>Tata AIG</option>
+          <option>United India Insurance</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="step2-next">See Quote Range -></button>
+      <button class="btn-ghost" data-go-step="1"><- Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: CONTACT + QUOTE REVEAL -->
+  <div class="step-panel" id="step3">
+    <div class="step-header">
+      <div class="step-tag">Step 3 of 3</div>
+      <h1>Almost there</h1>
+      <p>Enter your details to see exact quotes from insurers.</p>
+    </div>
+
+    <div class="quote-preview" id="quote-preview">
+      <div class="quote-preview-label">Estimated premium range</div>
+      <div class="quote-range" id="quote-range">Rs 8,200 - Rs 14,700</div>
+      <div class="quote-note">Final quotes may vary. No spam - we promise.</div>
+      <div class="quote-insurer-count">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="white" stroke-width="1.2"/>
+          <path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        12 insurers ready to quote
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="As on Aadhaar" autocomplete="name">
+      <div class="error-msg" id="name-error">Please enter your full name</div>
+    </div>
+
+    <div class="field">
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" placeholder="10-digit number" maxlength="10" autocomplete="tel">
+      <div class="error-msg" id="mobile-error">Please enter a valid 10-digit mobile number</div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      <div class="error-msg" id="email-error">Please enter a valid email address</div>
+    </div>
+
+    <div class="field">
+      <label>Date of Birth</label>
+      <div class="dob-grid">
+        <div class="select-wrapper">
+          <select id="dob-day">
+            <option value="">DD</option>
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <select id="dob-month">
+            <option value="">MM</option>
+            <option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option>
+            <option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option>
+            <option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option>
+            <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <select id="dob-year">
+            <option value="">YYYY</option>
+          </select>
+        </div>
+      </div>
+      <div class="error-msg" id="dob-error">Please enter a valid date of birth</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="submit-btn">View My Quotes -></button>
+      <button class="btn-ghost" data-go-step="2"><- Back</button>
+    </div>
+    <div class="form-footer">
+      By submitting, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.<br>
+      We'll send quotes to your mobile and email.
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">OK</div>
+    <h1 class="success-title">Your quotes are ready!</h1>
+    <p class="success-subtitle">We found <strong id="quote-count">9</strong> plans for your vehicle.</p>
+
+    <div class="quote-result-card">
+      <div class="quote-result-label">Best quote</div>
+      <div class="best-quote" id="best-quote">Rs 8,240/year</div>
+      <div class="quote-result-meta">HDFC ERGO - Comprehensive Plan</div>
+    </div>
+
+    <p class="success-note">Full comparison sent to your email and mobile.</p>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
